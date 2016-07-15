@@ -17,6 +17,9 @@ module.exports = function (flights) {
 	functions.flight = function(req, res){
 		var number = req.param('number');
 
+		//Using existing data, we can set the session information
+		req.session.lastNumber = number;
+
 		if (typeof flights[number] === 'undefined') {
 			res.status(404).json({status: 'error'});
 		} else {
@@ -51,7 +54,7 @@ module.exports = function (flights) {
 
 	functions.list = function (req, res) {
 		res.render('list', {
-			title: 'All Flights', 
+			title: 'All Flights',
 			flights: flights});
 	};
 
@@ -64,7 +67,8 @@ module.exports = function (flights) {
 			} else {
 				res.render('arrivals', {
 					title: 'Arrivals',
-					arrivals: arrivals
+					arrivals: arrivals,
+					lastNumber: req.session.lastNumber
 				});
 			}
 		});
