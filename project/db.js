@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('<enter your connection string here>');
+mongoose.connect('localhost:27017/flights');
 
 module.exports = mongoose.connection;

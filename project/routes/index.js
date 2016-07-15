@@ -17,7 +17,6 @@ module.exports = function (flights) {
 	functions.flight = function(req, res){
 		var number = req.param('number');
 
-		//Using existing data, we can set the session information
 		req.session.lastNumber = number;
 
 		if (typeof flights[number] === 'undefined') {
@@ -54,7 +53,7 @@ module.exports = function (flights) {
 
 	functions.list = function (req, res) {
 		res.render('list', {
-			title: 'All Flights',
+			title: 'All Flights', 
 			flights: flights});
 	};
 
