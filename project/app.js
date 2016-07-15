@@ -7,7 +7,7 @@ module.exports = function (flights, db) {
 	var express = require('express');
 	var MongoStore = require('connect-mongo')(express);
 	var routes = require('./routes')(flights);
-	var path = require('path');	
+	var path = require('path');
 	var app = express();
 
 	// all environments
@@ -16,10 +16,15 @@ module.exports = function (flights, db) {
 	app.set('view engine', 'jade');
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
+	// Line below is going to read a cookie that the browser sends to the server
 	app.use(express.cookieParser());
+	// Setup the sessions. Takes an object as an argument. This object going to configure the session.
 	app.use(express.session({
+		// Type in a secret. typically we add a randomise string in here. the secret is used to encrypt the session information.
 		secret: 'keyboard cat',
+		// we add a store property. This tells where we want to store the session. Declare a new mongostore instance
 		store: new MongoStore({
+			// we set one property here for mongoose connection. no db connection, but we can pass it in.
 			mongoose_connection: db
 		})
 	}));
@@ -44,5 +49,3 @@ module.exports = function (flights, db) {
 
 	return app;
 }
-
-
