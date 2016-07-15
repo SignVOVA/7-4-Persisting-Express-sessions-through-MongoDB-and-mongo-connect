@@ -27,7 +27,7 @@ module.exports = function (flights, db) {
 		store: new MongoStore({
 			// we set one property here for mongoose connection. no db connection, but we can pass it in.
 			mongoose_connection: db
-		});
+		})
 	}));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
